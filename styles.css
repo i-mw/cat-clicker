@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 400px;
+    margin: 100px auto auto auto;
+    font-family: monospace;
+    /* border: 1px dashed red; */
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 50px;
+}
+
+#cat {
+    width: 100%;
+}
+
+#counter, .container>p:last-child {
+    text-align: center;
+    font-size: 2em;
+}
