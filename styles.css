@@ -16,15 +16,18 @@
 
 .container > .card {
     display: inline-block;
-    margin: 20px auto 0;
+    margin: 20px auto 10px;
     width: 40%;
     min-width: 300px;
     text-align: center;
     vertical-align: middle;
+    border: 1px solid grey;
+    border-radius: 5px;
 }
 
 .card h1 {
-    margin-bottom: 50px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
 }
 
 .cat-cont {
