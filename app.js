@@ -1,11 +1,12 @@
-let cat = document.getElementById('cat');
-let counter = document.getElementById('counter');
+let catConts = document.getElementsByClassName('cat-cont');
 
 function incrementCounter() {
+    let counter = this.parentElement.querySelector('.counter');
     let counterValue = Number(counter.innerText);
     counterValue++
     counter.innerText = counterValue;
-
 }
 
-cat.addEventListener('click', incrementCounter);
+for(let i=0; i<catConts.length; i++) {
+    catConts[i].addEventListener('click', incrementCounter);
+}
