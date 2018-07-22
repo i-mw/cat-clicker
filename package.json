@@ -1,0 +1,23 @@
+{
+  "name": "cat-clicker",
+  "version": "0.2.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-mw/cat-clicker.git"
+  },
+  "keywords": [
+    "cat",
+    "clicker"
+  ],
+  "author": "Mustafa Wahba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/i-mw/cat-clicker/issues"
+  },
+  "homepage": "https://github.com/i-mw/cat-clicker#readme"
+}
