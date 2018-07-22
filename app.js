@@ -1,5 +1,6 @@
 /* model */
 let model = {
+	adminPanelVisible: null,
 	currentCat: null,
 	cats: [
 		{
@@ -48,19 +49,46 @@ let octopus = {
 
 	setCurrentCat: function(index) {
 		model.currentCat = model.cats[index];
+
 		listView.render();
 		displayView.render();
+		adminView.render();
+	},
+
+	modifyCurrentCat: function(name, url, clicks) {
+		model.currentCat.name = name;
+		model.currentCat.url = url;
+		model.currentCat.clicks = clicks;
+
+		listView.render();
+		displayView.render();
+		adminView.render();
 	},
 
 	incrementClicks: function() {
 		model.currentCat.clicks++;
+
 		displayView.render();
+		adminView.render();
+	},
+
+	getAdminPanelState: function() {
+		return model.adminPanelVisible;
+	},
+
+	setAdminPanelState: function(state) {
+		model.adminPanelVisible = state;
+
+		adminView.render();
 	},
 
 	init: function() {
 		model.currentCat = model.cats[0];
+		model.adminPanelVisible = false;
+
 		listView.init();
 		displayView.init();
+		adminView.init();
 	}
 }
 
@@ -116,6 +144,59 @@ let displayView = {
 		this.imgContainer.innerHTML = '<img src="' + currentCat.url + '" '+
 			'alt="'+ currentCat.name+ ' cat">';
 		counter.innerText = currentCat.clicks;
+	}
+}
+
+
+/* Admin panel view */
+let adminView = {
+	init: function() {
+		//form
+		this.adminePanel = document.querySelector('.admin-board form');
+		//buttons
+		this.adminBtn = document.getElementById('admin-btn');
+		this.saveBtn = document.getElementById('save');
+		this.cancelBtn = document.getElementById('cancel');
+		//inputs
+		this.catName = document.getElementById('cat-name');
+		this.catImgURL = document.getElementById('cat-img-url');
+		this.catClicks = document.getElementById('cat-clicks');
+
+		this.adminBtn.addEventListener('click', function(eve) {
+			eve.preventDefault();
+			octopus.setAdminPanelState(!octopus.getAdminPanelState());
+		});
+
+		this.saveBtn.addEventListener('click', function(eve) {
+			eve.preventDefault();
+			let catName = adminView.catName.value,
+				catImgURL = adminView.catImgURL.value,
+				catClicks = adminView.catClicks.value;
+			octopus.modifyCurrentCat(catName, catImgURL, catClicks);
+			octopus.setAdminPanelState(false);
+		});
+
+		this.cancelBtn.addEventListener('click', function(eve) {
+			eve.preventDefault();
+			octopus.setAdminPanelState(false);			
+		});
+
+		this.render();
+	},
+
+	render: function() {
+		let cat = octopus.getCurrentCat(),
+		adminPanelState = octopus.getAdminPanelState();
+
+		this.catName.value = cat.name;
+		this.catImgURL.value = cat.url;
+		this.catClicks.value = cat.clicks;
+
+		if(adminPanelState) {
+			this.adminePanel.classList.remove('hidden');
+		} else {
+			this.adminePanel.classList.add('hidden');
+		}
 	}
 }
 

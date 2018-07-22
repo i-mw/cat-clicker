@@ -9,15 +9,15 @@ main {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
-    font-size: 1.5em;
+    padding-top: 10%;
     font-family: monospace;
+    font-size: 1.5em;
     text-align: center;
-    padding-top: 5%;
 }
 
 main > * {
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: top;
 }
 
 /* Left nav list */
@@ -26,6 +26,7 @@ main nav {
     max-width: 200px;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 3.7%;
     border: 1px solid grey;
     border-radius: 5px;
 }
@@ -60,13 +61,19 @@ nav ul li:active {
 /* Cat displaying area */
 main article {
     width: 100%;
-    max-width: 530px;
+    max-width: 800px;
+    text-align: center;
+}
+
+article > * {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
 }
 
 /* Cat card */
-main .card {
-    margin: 15% auto 0;
-    width: 100%;
+article .card {
+    margin: 0 auto 5%;
     max-width: 300px;
     text-align: center;
     border: 1px solid grey;
@@ -92,4 +99,48 @@ main .card {
 
 .counter, .card>p:last-child {
     margin-top: 10px;
+}
+
+/* Admin area */
+
+article .admin-board {
+    margin: 0 auto 0;
+    max-width: 300px;
+    font-family: serif;
+    font-size: 0.7em;
+    text-align: left;
+}
+
+.admin-board button {
+    padding: 4px;
+    border: 1px solid grey;
+    border-radius: 2px;
+}
+
+.admin-board button:hover {
+    cursor: pointer;
+}
+
+.admin-board #admin-btn {
+    margin-bottom: 10px;
+}
+
+.admin-board form {
+    padding: 8px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.admin-board form input {
+    border: 1px solid grey;
+    padding: 1px;
+    padding-left: 4px;
+}
+
+.admin-board form > * {
+    margin-top: 15px;
+}
+
+.hidden {
+    display: none;
 }
