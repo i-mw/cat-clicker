@@ -1,55 +1,122 @@
-let catList = document.querySelector('.list ul'),
-    card = {
-        header: document.querySelector('.name'),
-        imageCont: document.querySelector('.img-container'),
-        counter: document.querySelector('.counter')
-    },
-    catNames = ['bosy', 'cooky', 'mesho', 'sheka', 'zbeda'],
-    cats = {},
-    currentCat;
+/* model */
+let model = {
+	cats: [
+		{
+			name: 'bosy',
+			url: 'img/bosy.jpg',
+            clicks: 0,
+            id: 1
+		},
+		{
+			name: 'cooky',
+			url: 'img/cooky.jpg',
+            clicks: 0,
+            id: 2
+		},
+		{
+			name: 'mesho',
+			url: 'img/mesho.jpg',
+            clicks: 0,
+            id: 3
+		},
+		{
+			name: 'sheka',
+			url: 'img/sheka.jpg',
+            clicks: 0,
+            id: 4
+		},
+		{
+			name: 'zbeda',
+			url: 'img/zbeda.jpg',
+            clicks: 0,
+            id: 5
+		}
+	],
+};
 
-function resources(cb) {
-    catNames.forEach(function(catName){
-        cats[catName] = {};
-        cats[catName].name = catName.charAt(0).toUpperCase() + catName.slice(1);
-        cats[catName].img = document.createElement('img');
-        cats[catName].img.setAttribute('src', `img/${catName}.jpg`);
-        cats[catName].img.setAttribute('alt', `${catName} cat`);
-        cats[catName].clicks = 0;
-    });
-    cb();
+model.currentCat = model.cats[0];
+
+
+/* octopus */
+let octopus = {
+	getCats: function() {
+		return model.cats;
+	},
+
+	getCurrentCat: function() {
+		return model.currentCat;
+	},
+
+	setCurrentCat: function(index) {
+		model.currentCat = model.cats[index];
+		listView.render();
+		displayView.render();
+	},
+
+	incrementClicks: function() {
+		model.currentCat.clicks++;
+		displayView.render();
+	},
+
+	init: function() {
+		listView.init();
+		displayView.init();
+	}
 }
 
-function init() {
-    for( cat in cats) {
-        let temp = document.createElement('li');
-        temp.innerText = cats[cat].name;
-        catList.appendChild(temp);
-    }
 
-    currentCat = catNames[0];
-    catList.querySelector('li:first-child').classList.add('selected');
-    card.header.innerText = cats[currentCat].name;
-    card.imageCont.appendChild(cats[currentCat].img);
+/* list view */
+let listView = {
+	init: function() {
+		this.list = document.querySelector('.list ul');
+		this.list.addEventListener('click', function(eve){
+			if(eve.target.nodeName === 'LI'){
+				let targetId = eve.target.getAttribute('data-id');
+				octopus.setCurrentCat(targetId-1);
+			}
+		});
+
+		listView.render();
+	},
+
+	render: function() {
+        let cats = octopus.getCats(),
+		currentCat = octopus.getCurrentCat(),
+		list = this.list;
+		list.innerHTML = '';
+
+		cats.forEach(function(cat) {
+			catName = cat.name.charAt(0).toUpperCase() + cat.name.slice(1);
+			list.innerHTML += `<li data-id="${cat.id}">${catName}</li>\n`;
+		});
+
+        document.querySelector('[data-id="'+currentCat.id+'"').classList.add('selected');
+	}
 }
 
-resources(init);
 
-catList.addEventListener('click', function(eve){
-    if(eve.target.nodeName === 'LI') {
-        currentCat = eve.target.innerText.toLowerCase();
+/* cat display view */
+let displayView = {
+	init: function() {
+		this.imgContainer = document.querySelector('.img-container');
+		this.imgContainer.addEventListener('click', function() {
+			octopus.incrementClicks();
+		});
 
-        catList.querySelector('.selected').classList.remove('selected');
-        eve.target.classList.add('selected');
+		displayView.render();
+	},
 
-        card.header.innerText = cats[currentCat].name;
-        card.imageCont.innerHTML = ' ';
-        card.imageCont.appendChild(cats[currentCat].img);
-        card.counter.innerText = cats[currentCat].clicks;
-    }
-}); 
+	render: function() {
+		let currentCat = octopus.getCurrentCat(),
+		    header = document.querySelector('.name'),
+		    counter = document.querySelector('.counter'),
+		    catName = currentCat.name.charAt(0).toUpperCase() + currentCat.name.slice(1);
 
-card.imageCont.addEventListener('click', function() {
-    cats[currentCat].clicks++;
-    card.counter.innerText = cats[currentCat].clicks;
-});
+		header.innerText = catName;
+		this.imgContainer.innerHTML = '<img src="' + currentCat.url + '" '+
+			'alt="'+ currentCat.name+ ' cat">';
+		counter.innerText = currentCat.clicks;
+	}
+}
+
+octopus.init();
