@@ -1,26 +1,74 @@
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
     border: 0;
 }
 
-.container {
+/* Main container */
+main {
     width: 80%;
     margin-right: auto;
     margin-left: auto;
     font-size: 1.5em;
     font-family: monospace;
     text-align: center;
+    padding-top: 5%;
 }
 
-.container > .card {
+main > * {
     display: inline-block;
-    margin: 20px auto 10px;
-    width: 40%;
-    min-width: 300px;
+    vertical-align: bottom;
+}
+
+/* Left nav list */
+main nav {
+    width: 100%;
+    max-width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+nav h3 {
+    text-decoration: underline;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    line-height: 2em;
+    border: 1px dashed transparent;
+}
+
+nav ul li:hover {
+    border: 1px dashed grey;
+    cursor: pointer;
+}
+
+nav ul li:active {
+    color: brown;
+}
+
+.selected {
+    border: 1px dashed grey;
+    color: brown;
+}
+
+/* Cat displaying area */
+main article {
+    width: 100%;
+    max-width: 530px;
+}
+
+/* Cat card */
+main .card {
+    margin: 15% auto 0;
+    width: 100%;
+    max-width: 300px;
     text-align: center;
-    vertical-align: middle;
     border: 1px solid grey;
     border-radius: 5px;
 }
@@ -28,18 +76,18 @@
 .card h1 {
     margin-bottom: 15px;
     font-size: 1.5em;
+    font-weight: lighter;
 }
 
-.cat-cont {
+.img-container {
     width: 100%;
     height: 0;
-    overflow-y: hidden;
     padding-bottom: 60%;
+    overflow-y: hidden;
 }
 
-.cat {
+.img-container img {
     width: 100%;
-
 }
 
 .counter, .card>p:last-child {
