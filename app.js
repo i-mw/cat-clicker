@@ -36,7 +36,7 @@ function init() {
 resources(init);
 
 catList.addEventListener('click', function(eve){
-    if(eve.target.nodeName = 'LI') {
+    if(eve.target.nodeName === 'LI') {
         currentCat = eve.target.innerText.toLowerCase();
 
         catList.querySelector('.selected').classList.remove('selected');
