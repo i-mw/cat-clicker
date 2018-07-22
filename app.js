@@ -1,5 +1,6 @@
 /* model */
 let model = {
+	currentCat: null,
 	cats: [
 		{
 			name: 'bosy',
@@ -34,8 +35,6 @@ let model = {
 	],
 };
 
-model.currentCat = model.cats[0];
-
 
 /* octopus */
 let octopus = {
@@ -59,6 +58,7 @@ let octopus = {
 	},
 
 	init: function() {
+		model.currentCat = model.cats[0];
 		listView.init();
 		displayView.init();
 	}
@@ -76,7 +76,7 @@ let listView = {
 			}
 		});
 
-		listView.render();
+		this.render();
 	},
 
 	render: function() {
@@ -103,7 +103,7 @@ let displayView = {
 			octopus.incrementClicks();
 		});
 
-		displayView.render();
+		this.render();
 	},
 
 	render: function() {
